@@ -11,4 +11,4 @@ Benchmarks are run on [Travis CI](https://travis-ci.org/lschmierer/ecs_bench/).
  * 1000 entities with `position` and `velocity` components
  * 9000 entities with `position` components only
  * stub `render` system
- * `physics` system : `position += velocity`
+ * `physics` system: `position += velocity`

@@ -1,10 +1,8 @@
-const N: usize = 10_000;
-
 /// Entities with velocity and position component.
-pub const N_VEL: usize = N / 10;
+pub const N_VEL: usize = 1000;
 
 /// Entities with position component only.
-pub const N_POS: usize = N - N_VEL;
+pub const N_POS: usize = N - 9000;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Position {
