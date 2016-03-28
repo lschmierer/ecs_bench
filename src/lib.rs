@@ -1,9 +1,9 @@
-use std::thread;
-use std::time::Duration;
-
-
 const N: usize = 10_000;
+
+/// Entities with velocity and position component.
 pub const N_VEL: usize = N / 10;
+
+/// Entities with position component only.
 pub const N_POS: usize = N - N_VEL;
 
 #[derive(Copy, Clone, Debug, PartialEq)]

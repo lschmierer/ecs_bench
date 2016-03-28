@@ -74,10 +74,12 @@ systems! {
 }
 
 #[bench]
-fn bench(b: &mut Bencher) {
-    let mut world = World::<MySystems>::new();
-
+fn bench_ecs(b: &mut Bencher) {
     b.iter(|| {
+        // setup world
+        let mut world = World::<MySystems>::new();
+
+        // setup entities
         for _ in 0..N_VEL {
             let _ = world.create_entity(|entity: BuildData<MyComponents>,
                                          data: &mut MyComponents| {
@@ -92,6 +94,7 @@ fn bench(b: &mut Bencher) {
             });
         }
 
+        // perform one iteration
         world.update();
     });
 }
