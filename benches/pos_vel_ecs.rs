@@ -12,7 +12,7 @@ use ecs::system::{EntityProcess, EntitySystem, System};
 use ecs::{DataHelper, EntityIter, World};
 use ecs::BuildData;
 
-use ecs_bench::{Position, Velocity, N_VEL, N_POS};
+use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
 components! {
     struct MyComponents {
@@ -80,7 +80,7 @@ fn bench_ecs(b: &mut Bencher) {
         let mut world = World::<MySystems>::new();
 
         // setup entities
-        for _ in 0..N_VEL {
+        for _ in 0..N_POS_VEL {
             let _ = world.create_entity(|entity: BuildData<MyComponents>,
                                          data: &mut MyComponents| {
                 data.position.add(&entity, Position { x: 0.0, y: 0.0 });
