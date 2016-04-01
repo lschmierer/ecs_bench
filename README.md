@@ -5,9 +5,10 @@ Benchmarks are run on [Travis CI](https://travis-ci.org/lschmierer/ecs_bench/).
 
 Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
- Benchmark | [ecs](https://github.com/HeroesGrave/ecs-rs)
- --------- |:-----------------------------------------------:
- pos_vel   | 5,398,310 ns/iter (+/- 2,570,529)
+ Benchmark      | [ecs](https://github.com/HeroesGrave/ecs-rs)
+ -------------- |:--------------------------------------------:
+ pos_vel build  |
+ pos_vel update |
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
