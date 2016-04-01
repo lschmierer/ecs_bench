@@ -73,28 +73,40 @@ systems! {
     }
 }
 
+fn build() -> World<MySystems> {
+    let mut world = World::<MySystems>::new();
+
+    // setup entities
+    for _ in 0..N_POS_VEL {
+        let _ = world.create_entity(|entity: BuildData<MyComponents>,
+                                     data: &mut MyComponents| {
+            data.position.add(&entity, Position { x: 0.0, y: 0.0 });
+            data.velocity.add(&entity, Velocity { dx: 0.0, dy: 0.0 });
+        });
+    }
+    for _ in 0..N_POS {
+        let _ = world.create_entity(|entity: BuildData<MyComponents>,
+                                     data: &mut MyComponents| {
+            data.position.add(&entity, Position { x: 0.0, y: 0.0 });
+        });
+    }
+
+    world
+}
+
 #[bench]
-fn bench_ecs(b: &mut Bencher) {
+fn bench_build(b: &mut Bencher) {
     b.iter(|| {
-        // setup world
-        let mut world = World::<MySystems>::new();
+        build()
+    });
+}
 
-        // setup entities
-        for _ in 0..N_POS_VEL {
-            let _ = world.create_entity(|entity: BuildData<MyComponents>,
-                                         data: &mut MyComponents| {
-                data.position.add(&entity, Position { x: 0.0, y: 0.0 });
-                data.velocity.add(&entity, Velocity { dx: 0.0, dy: 0.0 });
-            });
-        }
-        for _ in 0..N_POS {
-            let _ = world.create_entity(|entity: BuildData<MyComponents>,
-                                         data: &mut MyComponents| {
-                data.position.add(&entity, Position { x: 0.0, y: 0.0 });
-            });
-        }
 
-        // perform one iteration
+#[bench]
+fn bench_update(b: &mut Bencher) {
+    let mut world = build();
+
+    b.iter(|| {
         world.update();
     });
 }
