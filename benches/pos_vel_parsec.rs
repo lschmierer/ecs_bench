@@ -7,24 +7,26 @@ extern crate parsec;
 
 extern crate ecs_bench;
 
+use parsec::{Component, VecStorage, Scheduler};
+
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
 struct PosComp(Position);
-impl parsec::Component for PosComp {
-    type Storage = parsec::VecStorage<PosComp>;
+impl Component for PosComp {
+    type Storage = VecStorage<PosComp>;
 }
 
 struct VelComp(Velocity);
-impl parsec::Component for VelComp {
-    type Storage = parsec::VecStorage<VelComp>;
+impl Component for VelComp {
+    type Storage = VecStorage<VelComp>;
 }
 
-fn build() -> parsec::Scheduler {
+fn build() -> Scheduler {
     let mut scheduler = {
         let mut w = parsec::World::new();
         w.register::<PosComp>();
         w.register::<VelComp>();
-        parsec::Scheduler::new(w, 4)
+        Scheduler::new(w, 4)
     };
 
     // setup entities
