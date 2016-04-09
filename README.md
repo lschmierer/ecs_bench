@@ -7,8 +7,8 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Benchmark      | [ecs](https://github.com/HeroesGrave/ecs-rs)
  -------------- |:--------------------------------------------:
- pos_vel build  |
- pos_vel update |
+ pos_vel build  | 1,933,665 ns/iter (+/- 35,257)
+ pos_vel update | 340,018 ns/iter (+/- 4,800)
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
