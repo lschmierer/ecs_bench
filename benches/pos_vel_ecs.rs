@@ -78,15 +78,13 @@ fn build() -> World<MySystems> {
 
     // setup entities
     for _ in 0..N_POS_VEL {
-        let _ = world.create_entity(|entity: BuildData<MyComponents>,
-                                     data: &mut MyComponents| {
+        let _ = world.create_entity(|entity: BuildData<MyComponents>, data: &mut MyComponents| {
             data.position.add(&entity, Position { x: 0.0, y: 0.0 });
             data.velocity.add(&entity, Velocity { dx: 0.0, dy: 0.0 });
         });
     }
     for _ in 0..N_POS {
-        let _ = world.create_entity(|entity: BuildData<MyComponents>,
-                                     data: &mut MyComponents| {
+        let _ = world.create_entity(|entity: BuildData<MyComponents>, data: &mut MyComponents| {
             data.position.add(&entity, Position { x: 0.0, y: 0.0 });
         });
     }
@@ -96,9 +94,7 @@ fn build() -> World<MySystems> {
 
 #[bench]
 fn bench_build(b: &mut Bencher) {
-    b.iter(|| {
-        build()
-    });
+    b.iter(|| build());
 }
 
 
