@@ -7,7 +7,7 @@ extern crate parsec;
 
 extern crate ecs_bench;
 
-use parsec::{Component, VecStorage, Scheduler};
+use parsec::{Entity, Component, Scheduler, Storage, VecStorage};
 
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
@@ -30,16 +30,24 @@ fn build() -> Scheduler {
     };
 
     // setup entities
-    for _ in 0..N_POS_VEL {
-        scheduler.add_entity()
-                 .with(PosComp(Position { x: 0.0, y: 0.0 }))
-                 .with(VelComp(Velocity { dx: 0.0, dy: 0.0 }))
-                 .build();
-    }
-    for _ in 0..N_POS {
-        scheduler.add_entity()
-                 .with(PosComp(Position { x: 0.0, y: 0.0 }))
-                 .build();
+    {
+        let ents: Vec<Entity> = (0..N_POS_VEL + N_POS)
+                                    .map(|_| scheduler.add_entity().build())
+                                    .collect();
+
+        let mut positions = scheduler.get_world().write::<PosComp>();
+        let mut velocities = scheduler.get_world().write::<VelComp>();
+
+        ents.iter()
+            .take(N_POS_VEL)
+            .inspect(|e| positions.add(*e.clone(), PosComp(Position { x: 0.0, y: 0.0 })))
+            .inspect(|e| velocities.add(*e.clone(), VelComp(Velocity { dx: 0.0, dy: 0.0 })))
+            .collect::<Vec<&Entity>>();
+
+        ents.iter()
+            .skip(N_POS_VEL)
+            .inspect(|e| positions.add(*e.clone(), PosComp(Position { x: 0.0, y: 0.0 })))
+            .collect::<Vec<&Entity>>();
     }
 
     scheduler
