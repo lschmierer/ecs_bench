@@ -38,16 +38,13 @@ fn build() -> Scheduler {
         let mut positions = scheduler.get_world().write::<PosComp>();
         let mut velocities = scheduler.get_world().write::<VelComp>();
 
-        ents.iter()
-            .take(N_POS_VEL)
-            .inspect(|e| positions.add(*e.clone(), PosComp(Position { x: 0.0, y: 0.0 })))
-            .inspect(|e| velocities.add(*e.clone(), VelComp(Velocity { dx: 0.0, dy: 0.0 })))
-            .collect::<Vec<&Entity>>();
-
-        ents.iter()
-            .skip(N_POS_VEL)
-            .inspect(|e| positions.add(*e.clone(), PosComp(Position { x: 0.0, y: 0.0 })))
-            .collect::<Vec<&Entity>>();
+        for i in 0..N_POS_VEL {
+            positions.add(ents[i], PosComp(Position { x: 0.0, y: 0.0 }));
+            velocities.add(ents[i], VelComp(Velocity { dx: 0.0, dy: 0.0 }));
+        }
+        for i in N_POS_VEL..N_POS {
+            positions.add(ents[i], PosComp(Position { x: 0.0, y: 0.0 }));
+        }
     }
 
     scheduler
