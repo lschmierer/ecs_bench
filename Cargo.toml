@@ -5,6 +5,4 @@ authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 
 [dev-dependencies]
 ecs = "0.23"
-
-[dev-dependencies.parsec]
-git = "https://github.com/kvark/parsec"
+parsec = "0.3"
