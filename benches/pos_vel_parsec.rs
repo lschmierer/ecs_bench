@@ -7,7 +7,7 @@ extern crate parsec;
 
 extern crate ecs_bench;
 
-use parsec::{Component, VecStorage, Scheduler};
+use parsec::{Entity, Component, Scheduler, Storage, VecStorage};
 
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
@@ -22,27 +22,27 @@ impl Component for VelComp {
 }
 
 fn build() -> Scheduler {
-    let mut scheduler = {
-        let mut w = parsec::World::new();
-        w.register::<PosComp>();
-        w.register::<VelComp>();
-        Scheduler::new(w, 4)
-    };
+    let mut w = parsec::World::new();
+    w.register::<PosComp>();
+    w.register::<VelComp>();
 
     // setup entities
-    for _ in 0..N_POS_VEL {
-        scheduler.add_entity()
-                 .with(PosComp(Position { x: 0.0, y: 0.0 }))
-                 .with(VelComp(Velocity { dx: 0.0, dy: 0.0 }))
-                 .build();
-    }
-    for _ in 0..N_POS {
-        scheduler.add_entity()
-                 .with(PosComp(Position { x: 0.0, y: 0.0 }))
-                 .build();
+    {
+        let ents: Vec<Entity> = w.create_iter().take(N_POS_VEL + N_POS).collect();
+
+        let mut positions = w.write::<PosComp>();
+        let mut velocities = w.write::<VelComp>();
+
+        for e in ents[..N_POS_VEL].iter() {
+            positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
+            velocities.insert(*e, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
+        }
+        for e in ents[N_POS_VEL..N_POS_VEL].iter() {
+            positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
+        }
     }
 
-    scheduler
+    Scheduler::new(w, 4)
 }
 
 #[bench]
