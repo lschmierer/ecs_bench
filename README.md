@@ -7,10 +7,10 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Benchmark       | [ecs](https://github.com/HeroesGrave/ecs-rs) | [parsec](https://github.com/kvark/parsec)
  --------------- |:--------------------------------------------:|:-----------------------------------------:
- pos_vel build   | 2,214,413 ns/iter (+/- 850,677)              | 279,377 ns/iter (+/- 126,655)
- pos_vel update  | 399,810 ns/iter (+/- 7,190)                  | 263,236 ns/iter (+/- 5,039)
- parallel build  | 1,873,907 ns/iter (+/- 925,296)              | 603,136 ns/iter (+/- 136,539)
- parallel update | 5,119,899 ns/iter (+/- 4,130,840)            | 269,848 ns/iter (+/- 167,807)
+ pos_vel build   | 2,871,544 ns/iter (+/- 765,699)              | 499,714 ns/iter (+/- 149,652)
+ pos_vel update  | 769,322 ns/iter (+/- 51,116)                 | 355,962 ns/iter (+/- 34,340)
+ parallel build  | 2,749,608 ns/iter (+/- 390,895)              | 705,178 ns/iter (+/- 119,296)
+ parallel update | 9,211,415 ns/iter (+/- 2,295,994)            | 361,683 ns/iter (+/- 97,809)
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
