@@ -37,7 +37,7 @@ fn build() -> Scheduler {
             positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
             velocities.insert(*e, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
         }
-        for e in ents[N_POS_VEL..N_POS_VEL].iter() {
+        for e in ents[N_POS_VEL..].iter() {
             positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
         }
     }
