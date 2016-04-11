@@ -56,7 +56,7 @@ impl EntityProcess for W2System {
         for e in entities {
             let mut w2 = data.w2[e];
             let r = data.r[e];
-            w2.x += r.x;
+            w2.x *= r.x;
             data.w2[e] = w2;
         }
     }
