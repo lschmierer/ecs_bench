@@ -52,8 +52,9 @@ impl System for Render {
 impl EntityProcess for Render {
     fn process(&mut self,
                entities: EntityIter<MyComponents>,
-               _: &mut DataHelper<MyComponents, ()>) {
-        for _ in entities {
+               data: &mut DataHelper<MyComponents, ()>) {
+        for e in entities {
+            let _ = data.position[e];
         }
     }
 }
