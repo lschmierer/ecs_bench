@@ -5,12 +5,12 @@ Benchmarks are run on [Travis CI](https://travis-ci.org/lschmierer/ecs_bench/).
 
 Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
- Benchmark       | [ecs](https://github.com/HeroesGrave/ecs-rs) | [parsec](https://github.com/kvark/parsec)
- --------------- |:--------------------------------------------:|:-----------------------------------------:
- pos_vel build   | 2,871,544 ns/iter (+/- 765,699)              | 499,714 ns/iter (+/- 149,652)
- pos_vel update  | 769,322 ns/iter (+/- 51,116)                 | 355,962 ns/iter (+/- 34,340)
- parallel build  | 2,749,608 ns/iter (+/- 390,895)              | 705,178 ns/iter (+/- 119,296)
- parallel update | 9,211,415 ns/iter (+/- 2,295,994)            | 361,683 ns/iter (+/- 97,809)
+ Benchmark       | [ecs](https://github.com/HeroesGrave/ecs-rs) | [parsec](https://github.com/kvark/parsec) | [recs](https://github.com/andybarron/rustic-ecs)
+ --------------- |:--------------------------------------------:|:-----------------------------------------:|:-------------------------------------:
+ pos_vel build   | 2,013,306 ns/iter (+/- 788,473)              | 578,499 ns/iter (+/- 253,662)             | 20,182,358 ns/iter (+/- 11,517,429)
+ pos_vel update  | 414,978 ns/iter (+/- 27,808)                 | 341,488 ns/iter (+/- 29,824)              | 8,020,501 ns/iter (+/- 3,332,460)
+ parallel build  | 1,890,371 ns/iter (+/- 56,579)               | 728,059 ns/iter (+/- 200,764)             | 22,702,370 ns/iter (+/- 5,162,507)
+ parallel update | 5,192,265 ns/iter (+/- 590,865)              | 270,586 ns/iter (+/- 53,339)              | 16,014,551 ns/iter (+/- 7,606,844)
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
@@ -22,3 +22,4 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
  * 10000 entities with 3 simple components `R`, `W1` and `W2`
  * `w1` system reads `R` and writes to `W1`
  * `w2` system reads `R` and writes to `W2`
+ * systems could be run in parallel
