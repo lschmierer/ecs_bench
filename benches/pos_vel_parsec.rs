@@ -62,5 +62,6 @@ fn bench_update(b: &mut Bencher) {
         });
         scheduler.run0w1r(|_: &PosComp| {
         });
+        scheduler.wait();
     });
 }
