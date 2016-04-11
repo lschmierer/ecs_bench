@@ -68,9 +68,9 @@ systems! {
             w1: EntitySystem<W1System> = EntitySystem::new(
                 W1System,
                 aspect!(<MyComponents> all: [r, w1])),
-                    w2: EntitySystem<W2System> = EntitySystem::new(
-                        W2System,
-                        aspect!(<MyComponents> all: [r, w2])),
+            w2: EntitySystem<W2System> = EntitySystem::new(
+                W2System,
+                aspect!(<MyComponents> all: [r, w2])),
         },
         passive: {
         }
