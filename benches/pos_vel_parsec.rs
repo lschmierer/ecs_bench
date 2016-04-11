@@ -50,7 +50,6 @@ fn bench_build(b: &mut Bencher) {
     b.iter(|| build());
 }
 
-
 #[bench]
 fn bench_update(b: &mut Bencher) {
     let mut scheduler = build();

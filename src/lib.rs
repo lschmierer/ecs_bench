@@ -20,3 +20,23 @@ pub mod pos_vel {
     }
 
 }
+
+pub mod parallel {
+
+    pub const N: usize = 10000;
+
+    #[derive(Copy, Clone, Debug, PartialEq)]
+    pub struct R {
+        pub x: f32,
+    }
+
+    #[derive(Copy, Clone, Debug, PartialEq)]
+    pub struct W1 {
+        pub x: f32,
+    }
+
+    #[derive(Copy, Clone, Debug, PartialEq)]
+    pub struct W2 {
+        pub x: f32,
+    }
+}
