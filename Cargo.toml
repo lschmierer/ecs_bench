@@ -4,5 +4,6 @@ version = "0.1.0"
 authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 
 [dev-dependencies]
-ecs = "0.23"
-parsec = "0.3"
+ecs = "0.23.1"
+parsec = "0.3.1"
+recs = "2.0.1"
