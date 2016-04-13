@@ -5,8 +5,7 @@ use test::Bencher;
 #[macro_use]
 extern crate trex;
 
-use trex::{System, EventQueue, EventEmitter, Simulation, World,
-           ComponentFilter};
+use trex::{System, EventQueue, EventEmitter, Simulation, World, ComponentFilter};
 
 extern crate ecs_bench;
 use ecs_bench::parallel::{R, W1, W2, N};
@@ -24,21 +23,27 @@ impl W1System {
     pub fn new() -> W1System {
         W1System {
             filter: ComponentFilter::new()
-                .with::<RComp>()
-                .with::<W1Comp>(),
+                        .with::<RComp>()
+                        .with::<W1Comp>(),
         }
     }
 }
 
 impl System for W1System {
-    fn update(&mut self, world: &mut World, _queue: &EventQueue, _emitter: &mut EventEmitter, _dt: f32) {
+    fn update(&mut self,
+              world: &mut World,
+              _queue: &EventQueue,
+              _emitter: &mut EventEmitter,
+              _dt: f32) {
         for entity in world.filter(&self.filter) {
             let &RComp(R { x }) = world.get(entity).unwrap();
             let mut w1 = world.get_mut::<W1Comp>(entity).unwrap();
             w1.0.x = x;
         }
     }
-}pub struct W2System {
+}
+
+pub struct W2System {
     filter: ComponentFilter,
 }
 
@@ -46,14 +51,18 @@ impl W2System {
     pub fn new() -> W2System {
         W2System {
             filter: ComponentFilter::new()
-                .with::<RComp>()
-                .with::<W2Comp>(),
+                        .with::<RComp>()
+                        .with::<W2Comp>(),
         }
     }
 }
 
 impl System for W2System {
-    fn update(&mut self, world: &mut World, _queue: &EventQueue, _emitter: &mut EventEmitter, _dt: f32) {
+    fn update(&mut self,
+              world: &mut World,
+              _queue: &EventQueue,
+              _emitter: &mut EventEmitter,
+              _dt: f32) {
         for entity in world.filter(&self.filter) {
             let &RComp(R { x }) = world.get(entity).unwrap();
             let mut w2 = world.get_mut::<W2Comp>(entity).unwrap();
@@ -101,4 +110,3 @@ fn bench_update(b: &mut Bencher) {
         simulation.update(1.0);
     });
 }
-

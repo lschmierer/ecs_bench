@@ -60,8 +60,8 @@ fn bench_update(b: &mut Bencher) {
     let mut planner = build();
 
     b.iter(|| {
-        planner.run1w1r(|w1: &mut W1Comp, r: &RComp| w1.0.x += r.0.x);
-        planner.run1w1r(|w2: &mut W2Comp, r: &RComp| w2.0.x *= r.0.x);
+        planner.run1w1r(|w1: &mut W1Comp, r: &RComp| w1.0.x = r.0.x);
+        planner.run1w1r(|w2: &mut W2Comp, r: &RComp| w2.0.x = r.0.x);
         planner.wait();
     });
 }
