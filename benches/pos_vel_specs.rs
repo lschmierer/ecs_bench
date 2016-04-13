@@ -3,11 +3,11 @@
 extern crate test;
 use test::Bencher;
 
-extern crate parsec;
+extern crate specs;
 
 extern crate ecs_bench;
 
-use parsec::{Entity, Component, Scheduler, Storage, VecStorage};
+use specs::{World, Entity, Component, Planner, Storage, VecStorage};
 
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
@@ -21,8 +21,8 @@ impl Component for VelComp {
     type Storage = VecStorage<VelComp>;
 }
 
-fn build() -> Scheduler {
-    let mut w = parsec::World::new();
+fn build() -> Planner {
+    let mut w = World::new();
     w.register::<PosComp>();
     w.register::<VelComp>();
 
@@ -42,7 +42,7 @@ fn build() -> Scheduler {
         }
     }
 
-    Scheduler::new(w, 4)
+    Planner::new(w, 4)
 }
 
 #[bench]
@@ -52,15 +52,15 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let mut scheduler = build();
+    let mut planner = build();
 
     b.iter(|| {
-        scheduler.run1w1r(|p: &mut PosComp, v: &VelComp| {
+        planner.run1w1r(|p: &mut PosComp, v: &VelComp| {
             p.0.x += v.0.dx;
             p.0.y += v.0.dy;
         });
-        scheduler.run0w1r(|_: &PosComp| {
+        planner.run0w1r(|_: &PosComp| {
         });
-        scheduler.wait();
+        planner.wait();
     });
 }

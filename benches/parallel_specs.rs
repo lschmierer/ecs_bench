@@ -3,11 +3,11 @@
 extern crate test;
 use test::Bencher;
 
-extern crate parsec;
+extern crate specs;
 
 extern crate ecs_bench;
 
-use parsec::{Entity, Component, Scheduler, Storage, VecStorage};
+use specs::{World, Entity, Component, Planner, Storage, VecStorage};
 
 use ecs_bench::parallel::{R, W1, W2, N};
 
@@ -26,8 +26,8 @@ impl Component for W2Comp {
     type Storage = VecStorage<W2Comp>;
 }
 
-fn build() -> Scheduler {
-    let mut w = parsec::World::new();
+fn build() -> Planner {
+    let mut w = World::new();
     w.register::<RComp>();
     w.register::<W1Comp>();
     w.register::<W2Comp>();
@@ -47,7 +47,7 @@ fn build() -> Scheduler {
         }
     }
 
-    Scheduler::new(w, 4)
+    Planner::new(w, 4)
 }
 
 #[bench]
@@ -57,11 +57,11 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let mut scheduler = build();
+    let mut planner = build();
 
     b.iter(|| {
-        scheduler.run1w1r(|w1: &mut W1Comp, r: &RComp| w1.0.x += r.0.x);
-        scheduler.run1w1r(|w2: &mut W2Comp, r: &RComp| w2.0.x *= r.0.x);
-        scheduler.wait();
+        planner.run1w1r(|w1: &mut W1Comp, r: &RComp| w1.0.x += r.0.x);
+        planner.run1w1r(|w2: &mut W2Comp, r: &RComp| w2.0.x *= r.0.x);
+        planner.wait();
     });
 }

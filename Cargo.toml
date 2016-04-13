@@ -5,5 +5,5 @@ authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 
 [dev-dependencies]
 ecs = "0.23.1"
-parsec = "0.3.1"
+specs = "0.4.0"
 recs = "2.0.1"
