@@ -7,3 +7,4 @@ authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 ecs = "0.23.1"
 specs = "0.4.0"
 recs = "2.0.1"
+trex = "0.2.0"
