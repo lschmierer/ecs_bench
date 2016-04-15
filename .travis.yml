@@ -4,16 +4,17 @@ rust:
 branches:
   only:
     - bench
-script: cargo build --verbose
-after_success: ! '[ $TRAVIS_BRANCH = bench ] &&
+script: ! '[ $TRAVIS_BRANCH = bench ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
   export PATH=$HOME/.local/bin:$PATH &&
   cargo bench &&
   python bench_results.py &&
-  git add README.md &&
-  git commit -m "update benchmark results" &&
+  git config user.email "lukas.schmierer@lschmierer.de" &&
+  git config user.name "Lukas Schmierer" &&
   git checkout master &&
   git merge bench &&
+  git add README.md &&
+  git commit -m "update benchmark results" &&
   git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git master
 '
 env:
