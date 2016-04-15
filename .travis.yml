@@ -12,10 +12,10 @@ script: ! '[ $TRAVIS_BRANCH = bench ] &&
   git config user.email "lukas.schmierer@lschmierer.de" &&
   git config user.name "Lukas Schmierer" &&
   git pull origin master &&
-  git checkout master &&
-  git merge bench &&
   git add README.md &&
   git commit -m "update benchmark results" &&
+  git checkout master &&
+  git merge bench -m "update benchmark results" &&
   git push -f https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git master
 '
 env:
