@@ -5,7 +5,7 @@ branches:
   only:
     - bench
 script: cargo build --verbose
-after_success: ! '[ $TRAVIS_BRANCH = master ] &&
+after_success: ! '[ $TRAVIS_BRANCH = bench ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
   export PATH=$HOME/.local/bin:$PATH &&
   cargo bench &&
