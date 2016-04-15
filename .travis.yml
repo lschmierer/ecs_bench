@@ -11,6 +11,7 @@ script: ! '[ $TRAVIS_BRANCH = bench ] &&
   python bench_results.py &&
   git config user.email "lukas.schmierer@lschmierer.de" &&
   git config user.name "Lukas Schmierer" &&
+  git pull origin master &&
   git checkout master &&
   git merge bench &&
   git add README.md &&
