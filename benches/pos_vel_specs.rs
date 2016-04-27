@@ -7,7 +7,7 @@ extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, Planner, Storage, VecStorage};
+use specs::{World, Entity, Component, Planner, VecStorage};
 
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 
@@ -21,7 +21,7 @@ impl Component for VelComp {
     type Storage = VecStorage<VelComp>;
 }
 
-fn build() -> Planner {
+fn build() -> Planner<()> {
     let mut w = World::new();
     w.register::<PosComp>();
     w.register::<VelComp>();
