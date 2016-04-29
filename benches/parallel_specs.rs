@@ -7,7 +7,7 @@ extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, Planner, Storage, VecStorage};
+use specs::{World, Entity, Component, Planner, VecStorage};
 
 use ecs_bench::parallel::{R, W1, W2, N};
 
@@ -26,7 +26,7 @@ impl Component for W2Comp {
     type Storage = VecStorage<W2Comp>;
 }
 
-fn build() -> Planner {
+fn build() -> Planner<()> {
     let mut w = World::new();
     w.register::<RComp>();
     w.register::<W1Comp>();
