@@ -13,7 +13,7 @@ def parse(out, bench_target, bench_name):
     result = out[index_result:index_end].strip()
     return result
 
-out = subprocess.check_output(["cargo", "bench"])
+out = subprocess.check_output(["cargo", "bench"], stderr=subprocess.STDOUT)
 
 with open('README.md.tmpl', 'r') as f:
     readme = f.read()
