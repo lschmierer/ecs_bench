@@ -3,8 +3,12 @@ name = "ecs_bench"
 version = "0.1.0"
 authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 
+[dependencies]
+rustc-serialize = "0.3"
+
 [dev-dependencies]
 ecs = "0.23.1"
 specs = "0.6"
 recs = "2.0.1"
 trex = "0.2.0"
+calx-ecs = "0.3"
