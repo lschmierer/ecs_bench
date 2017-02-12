@@ -23,8 +23,8 @@ struct World {
 
 fn build() -> World {
     let mut world = World {
-        pos: Storage::new(),
-        vel: Storage::new(),
+        pos: Storage::with_capacity(N_POS_VEL + N_POS),
+        vel: Storage::with_capacity(N_POS_VEL),
         entities: Vec::with_capacity(N_POS_VEL + N_POS),
     };
 
