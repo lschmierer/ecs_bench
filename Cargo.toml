@@ -4,13 +4,12 @@ version = "0.1.0"
 authors = ["Lukas Schmierer <lukas.schmierer@lschmierer.de>"]
 
 [dependencies]
-serde_derive = "0.9"
-serde = "0.9"
+rustc-serialize = "0.3"
 
 [dev-dependencies]
 ecs = "0.23.1"
 specs = "0.6"
 recs = "2.0.1"
 trex = "0.2.0"
-calx-ecs = "0.5"
+calx-ecs = "0.3"
 froggy = "0.1"
