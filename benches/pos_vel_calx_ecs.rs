@@ -4,7 +4,9 @@ use test::Bencher;
 
 #[macro_use]
 extern crate calx_ecs;
-extern crate rustc_serialize;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde;
 
 extern crate ecs_bench;
 
@@ -45,7 +47,7 @@ fn bench_update(b: &mut Bencher) {
 
     b.iter(|| {
         // Update
-        let with_velocity: Vec<Entity> = ecs.vel.iter().map(|(&e, _)| e).collect();
+        let with_velocity: Vec<Entity> = ecs.vel.ent_iter().cloned().collect();
         for &e in &with_velocity {
             let vel = ecs.vel[e];
             ecs.pos.get_mut(e).map(|pos| {
