@@ -16,8 +16,9 @@ type W1s = VecResource<W1>;
 type W2s = VecResource<W2>;
 
 fn build() -> World {
-    // setup entities
     let mut update = SystemCommandBuffer::default();
+
+    // setup entities
     update.queue_systems(|scope| {
         scope.run_r0w3(|ctx, rs: &mut Rs, w1s: &mut W1s, w2s: &mut W2s| {
             for _ in 0..N {
@@ -45,15 +46,18 @@ fn bench_build(b: &mut Bencher) {
 #[bench]
 fn bench_update(b: &mut Bencher) {
     let mut world = build();
+    let mut update = SystemCommandBuffer::default();
+
+    update.queue_systems(|scope| {
+        scope.run_r1w1(|ctx, rs: &Rs, w1s: &mut W1s| {
+            ctx.iter_r1w1(rs, w1s).components(|_, r, w1| w1.x = r.x);
+        });
+        scope.run_r1w1(|ctx, rs: &Rs, w2s: &mut W2s| {
+            ctx.iter_r1w1(rs, w2s).components(|_, r, w2| w2.x = r.x);
+        });
+    });
 
     b.iter(|| {
-        let mut update = SystemCommandBuffer::default();
-        update.queue_systems(|scope| {
-            scope.run_r1w2(|ctx, rs: &Rs, w1s: &mut W1s, w2s: &mut W1s| {
-                ctx.iter_r1w1(rs, w1s).components(|_, r, w1| w1.x = r.x);
-                ctx.iter_r1w1(rs, w2s).components(|_, r, w2| w2.x = r.x);
-            });
-        });
         world.run(&mut update);
     });
 }
