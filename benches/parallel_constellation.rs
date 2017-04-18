@@ -15,7 +15,9 @@ type Rs = VecResource<R>;
 type W1s = VecResource<W1>;
 type W2s = VecResource<W2>;
 
-fn build(update: &mut SystemCommandBuffer) -> World {
+fn build() -> World {
+    let mut update = SystemCommandBuffer::default();
+
     // setup entities
     update.queue_systems(|scope| {
         scope.run_r0w3(|ctx, rs: &mut Rs, w1s: &mut W1s, w2s: &mut W2s| {
@@ -32,30 +34,30 @@ fn build(update: &mut SystemCommandBuffer) -> World {
     w.register_resource(Rs::new());
     w.register_resource(W1s::new());
     w.register_resource(W2s::new());
-    w.run(update);
+    w.run(&mut update);
     w
 }
 
 #[bench]
 fn bench_build(b: &mut Bencher) {
-    let mut update = SystemCommandBuffer::default();
-    b.iter(|| build(&mut update));
+    b.iter(|| build());
 }
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
+    let mut world = build();
     let mut update = SystemCommandBuffer::default();
-    let mut world = build(&mut update);
+
+    update.queue_systems(|scope| {
+        scope.run_r1w1(|ctx, rs: &Rs, w1s: &mut W1s| {
+            ctx.iter_r1w1(rs, w1s).components(|_, r, w1| w1.x = r.x);
+        });
+        scope.run_r1w1(|ctx, rs: &Rs, w2s: &mut W2s| {
+            ctx.iter_r1w1(rs, w2s).components(|_, r, w2| w2.x = r.x);
+        });
+    });
 
     b.iter(|| {
-        update.queue_systems(|scope| {
-            scope.run_r1w1(|ctx, rs: &Rs, w1s: &mut W1s| {
-                ctx.iter_r1w1(rs, w1s).components(|_, r, w1| w1.x = r.x);
-            });
-            scope.run_r1w1(|ctx, rs: &Rs, w2s: &mut W2s| {
-                ctx.iter_r1w1(rs, w2s).components(|_, r, w2| w2.x = r.x);
-            });
-        });
         world.run(&mut update);
     });
 }

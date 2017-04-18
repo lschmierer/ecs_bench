@@ -14,7 +14,8 @@ use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 type Positions = VecResource<Position>;
 type Velocities = VecResource<Velocity>;
 
-fn build(update: &mut SystemCommandBuffer) -> World {
+fn build() -> World {
+    let mut update = SystemCommandBuffer::default();
     // setup entities
     update.queue_systems(|scope| {
         scope.run_r0w2(|ctx, positions: &mut Positions, velocities: &mut Velocities| {
@@ -36,30 +37,30 @@ fn build(update: &mut SystemCommandBuffer) -> World {
     let mut w = World::new();
     w.register_resource(Positions::new());
     w.register_resource(Velocities::new());
-    w.run(update);
+    w.run(&mut update);
     w
 }
 
 #[bench]
 fn bench_build(b: &mut Bencher) {
-    let mut update = SystemCommandBuffer::default();
-    b.iter(|| build(&mut update));
+    b.iter(|| build());
 }
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
+    let mut world = build();
     let mut update = SystemCommandBuffer::default();
-    let mut world = build(&mut update);
 
-    b.iter(|| {
-        update.queue_systems(|scope| {
-            scope.run_r1w1(|ctx, velocities: &Velocities, positions: &mut Positions| {
-                ctx.iter_r1w1(velocities, positions).components(|_, v, p| {
-                    p.x += v.dx;
-                    p.y += v.dy;
-                });
+    update.queue_systems(|scope| {
+        scope.run_r1w1(|ctx, velocities: &Velocities, positions: &mut Positions| {
+            ctx.iter_r1w1(velocities, positions).components(|_, v, p| {
+                p.x += v.dx;
+                p.y += v.dy;
             });
         });
+    });
+
+    b.iter(|| {
         world.run(&mut update);
     });
 }
