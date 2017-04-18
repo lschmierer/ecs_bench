@@ -1,7 +1,7 @@
 import subprocess
 
 
-benches = ['ecs', 'specs', 'recs', 'trex', 'calx_ecs', 'froggy']
+benches = ['ecs', 'specs', 'recs', 'trex', 'calx_ecs', 'froggy', 'constellation']
 bench_targets = ['pos_vel', 'parallel']
 bench_names = ['build', 'update']
 

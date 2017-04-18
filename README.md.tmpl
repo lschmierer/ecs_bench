@@ -5,12 +5,20 @@ Benchmarks are run on [Travis CI](https://travis-ci.org/lschmierer/ecs_bench/).
 
 Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
- Benchmark       | [ecs](https://github.com/HeroesGrave/ecs-rs) | [specs](https://github.com/slide-rs/specs) | [recs](https://github.com/andybarron/rustic-ecs) | [trex](https://github.com/rcolinray/trex) | [calx-ecs](https://github.com/rsaarelm/calx-ecs) | [froggy](https://github.com/kvark/froggy)
- --------------- |:--------------------------------------------:|:------------------------------------------:|:------------------------------------------------:|:-----------------------------------------:|:------------------------------------------------:|:-----------------------------------------:
- pos_vel build   | {pos_vel_build_ecs}                          | {pos_vel_build_specs}                      | {pos_vel_build_recs}                             | {pos_vel_build_trex}                      | {pos_vel_build_calx_ecs}                         | {pos_vel_build_froggy}
- pos_vel update  | {pos_vel_update_ecs}                         | {pos_vel_update_specs}                     | {pos_vel_update_recs}                            | {pos_vel_update_trex}                     | {pos_vel_update_calx_ecs}                        | {pos_vel_update_froggy}
- parallel build  | {parallel_build_ecs}                         | {parallel_build_specs}                     | {parallel_build_recs}                            | {parallel_build_trex}                     | {parallel_build_calx_ecs}                        | {parallel_build_froggy}
- parallel update | {parallel_update_ecs}                        | {parallel_update_specs}                    | {parallel_update_recs}                           | {parallel_update_trex}                    | {parallel_update_calx_ecs}                       | {parallel_update_froggy}
+ Benchmark       | [ecs]                 | [specs]                 | [recs]                 | [trex]                 | [calx-ecs]                 | [froggy]                 | [constellation]
+ --------------- |:---------------------:|:-----------------------:|:----------------------:|:----------------------:|:--------------------------:|:------------------------:|:--------------------------------:
+ pos_vel build   | {pos_vel_build_ecs}   | {pos_vel_build_specs}   | {pos_vel_build_recs}   | {pos_vel_build_trex}   | {pos_vel_build_calx_ecs}   | {pos_vel_build_froggy}   | {pos_vel_build_constellation}
+ pos_vel update  | {pos_vel_update_ecs}  | {pos_vel_update_specs}  | {pos_vel_update_recs}  | {pos_vel_update_trex}  | {pos_vel_update_calx_ecs}  | {pos_vel_update_froggy}  | {pos_vel_update_constellation}
+ parallel build  | {parallel_build_ecs}  | {parallel_build_specs}  | {parallel_build_recs}  | {parallel_build_trex}  | {parallel_build_calx_ecs}  | {parallel_build_froggy}  | {parallel_build_constellation}
+ parallel update | {parallel_update_ecs} | {parallel_update_specs} | {parallel_update_recs} | {parallel_update_trex} | {parallel_update_calx_ecs} | {parallel_update_froggy} | {parallel_update_constellation}
+
+[ecs]: https://github.com/HeroesGrave/ecs-rs
+[specs]: https://github.com/slide-rs/specs
+[recs]: https://github.com/andybarron/rustic-ecs
+[trex]: https://github.com/rcolinray/trex
+[calx-ecs]: https://github.com/rsaarelm/calx-ecs
+[froggy]: https://github.com/kvark/froggy
+[constellation]: https://github.com/TomGillen/constellation/
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
