@@ -14,9 +14,8 @@ use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
 type Positions = VecResource<Position>;
 type Velocities = VecResource<Velocity>;
 
-fn build() -> World {
+fn build(update: &mut SystemCommandBuffer) -> World {
     // setup entities
-    let mut update = SystemCommandBuffer::default();
     update.queue_systems(|scope| {
         scope.run_r0w2(|ctx, positions: &mut Positions, velocities: &mut Velocities| {
             for _ in 0..N_POS_VEL {
@@ -37,21 +36,22 @@ fn build() -> World {
     let mut w = World::new();
     w.register_resource(Positions::new());
     w.register_resource(Velocities::new());
-    w.run(&mut update);
+    w.run(update);
     w
 }
 
 #[bench]
 fn bench_build(b: &mut Bencher) {
-    b.iter(|| build());
+    let mut update = SystemCommandBuffer::default();
+    b.iter(|| build(&mut update));
 }
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let mut world = build();
+    let mut update = SystemCommandBuffer::default();
+    let mut world = build(&mut update);
 
     b.iter(|| {
-        let mut update = SystemCommandBuffer::default();
         update.queue_systems(|scope| {
             scope.run_r1w1(|ctx, velocities: &Velocities, positions: &mut Positions| {
                 ctx.iter_r1w1(velocities, positions).components(|_, v, p| {
