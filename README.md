@@ -5,20 +5,23 @@ Benchmarks are run on [Travis CI](https://travis-ci.org/lschmierer/ecs_bench/).
 
 Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
- Benchmark       | [ecs]                 | [specs]                 | [recs]                 | [trex]                 | [calx-ecs]                 | [froggy]                 | [constellation]
- --------------- |:---------------------:|:-----------------------:|:----------------------:|:----------------------:|:--------------------------:|:------------------------:|:--------------------------------:
- pos_vel build   | 1,400,175 ns/iter (+/- 219,232)   | 299,432 ns/iter (+/- 21,723)   | 11,531,612 ns/iter (+/- 1,653,725)   | 943,169 ns/iter (+/- 174,093)   | 306,408 ns/iter (+/- 49,593)   | 787,266 ns/iter (+/- 164,335)   | 293,114 ns/iter (+/- 43,732)
- pos_vel update  | 296,750 ns/iter (+/- 52,060)  | 41,380 ns/iter (+/- 6,439)  | 3,852,468 ns/iter (+/- 969,110)  | 219,278 ns/iter (+/- 40,183)  | 19,123 ns/iter (+/- 5,586)  | 14,661 ns/iter (+/- 2,449)  | 9,019 ns/iter (+/- 1,682)
- parallel build  | 1,449,814 ns/iter (+/- 312,318)  | 396,730 ns/iter (+/- 40,184)  | 14,189,162 ns/iter (+/- 2,249,327)  | 1,615,398 ns/iter (+/- 273,796)  | 442,755 ns/iter (+/- 88,803)  | 1,910,969 ns/iter (+/- 348,899)  | 512,111 ns/iter (+/- 351,107)
- parallel update | 3,390,745 ns/iter (+/- 780,609) | 57,026 ns/iter (+/- 1,840) | 8,579,522 ns/iter (+/- 1,737,264) | 521,482 ns/iter (+/- 93,310) | 76,538 ns/iter (+/- 17,799) | 65,100 ns/iter (+/- 5,861) | 164,824 ns/iter (+/- 29,927)
+ Library         | pos_vel build                 | pos_vel update                 | parallel build                 | parallel update
+ --------------- |:-----------------------------:|:------------------------------:|:------------------------------:|:--------------------------------:
+ [calx-ecs]      | 299,027 ns/iter (+/- 48,816)      | 19,007 ns/iter (+/- 5,815)      | 437,760 ns/iter (+/- 109,311)      | 77,075 ns/iter (+/- 16,821)
+ [constellation] | 306,427 ns/iter (+/- 70,229) | 9,210 ns/iter (+/- 1,777) | 515,732 ns/iter (+/- 91,263) | 164,793 ns/iter (+/- 29,864)
+ [ecs]           | 1,402,763 ns/iter (+/- 240,065)           | 293,200 ns/iter (+/- 41,395)           | 1,474,755 ns/iter (+/- 362,815)           | 3,412,194 ns/iter (+/- 600,767)
+ [froggy]        | 778,978 ns/iter (+/- 127,929)        | 15,081 ns/iter (+/- 3,146)        | 1,856,722 ns/iter (+/- 412,493)        | 66,002 ns/iter (+/- 21,315)
+ [recs]          | 11,407,049 ns/iter (+/- 3,225,550)          | 3,724,867 ns/iter (+/- 918,360)          | 14,532,340 ns/iter (+/- 1,646,550)          | 8,324,179 ns/iter (+/- 2,097,752)
+ [specs]         | 297,508 ns/iter (+/- 25,520)         | 45,860 ns/iter (+/- 15,550)         | 399,688 ns/iter (+/- 88,382)         | 57,347 ns/iter (+/- 11,922)
+ [trex]          | 950,464 ns/iter (+/- 291,444)          | 228,419 ns/iter (+/- 35,679)          | 1,608,819 ns/iter (+/- 316,586)          | 486,097 ns/iter (+/- 288,601)
 
-[ecs]: https://github.com/HeroesGrave/ecs-rs
-[specs]: https://github.com/slide-rs/specs
-[recs]: https://github.com/andybarron/rustic-ecs
-[trex]: https://github.com/rcolinray/trex
 [calx-ecs]: https://github.com/rsaarelm/calx-ecs
-[froggy]: https://github.com/kvark/froggy
 [constellation]: https://github.com/TomGillen/constellation/
+[ecs]: https://github.com/HeroesGrave/ecs-rs
+[froggy]: https://github.com/kvark/froggy
+[recs]: https://github.com/andybarron/rustic-ecs
+[specs]: https://github.com/slide-rs/specs
+[trex]: https://github.com/rcolinray/trex
 
 ### pos_vel
  * 1000 entities with `position` and `velocity` components
