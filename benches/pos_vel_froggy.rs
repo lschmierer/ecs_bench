@@ -57,7 +57,7 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let mut world = build();
+    let world = build();
 
     b.iter(|| {
         let mut positions = world.pos.write();
