@@ -64,8 +64,8 @@ fn bench_update(b: &mut Bencher) {
         let velocities = world.vel.read();
         for e in world.entities.iter() {
             if let Some(ref vel) = e.vel {
-                let mut p = positions.access(&e.pos);
-                let v = velocities.access(vel);
+                let mut p = &mut positions[&e.pos];
+                let v = velocities[vel];
                 p.x += v.dx;
                 p.y += v.dy;
             }

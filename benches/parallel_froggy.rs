@@ -67,7 +67,7 @@ fn bench_update(b: &mut Bencher) {
             let r = wt1.r.read();
             let mut w = wt1.w1.write();
             for e in wt1.entities.iter() {
-                w.access(&e.w1).x = r.access(&e.r).x;
+                w[&e.w1].x = r[&e.r].x;
             }
         });
         let wt2 = world.clone();
@@ -75,7 +75,7 @@ fn bench_update(b: &mut Bencher) {
             let r = wt2.r.read();
             let mut w = wt2.w2.write();
             for e in wt2.entities.iter() {
-                w.access(&e.w2).x = r.access(&e.r).x;
+                w[&e.w2].x = r[&e.r].x;
             }
         });
         t1.join().unwrap();
