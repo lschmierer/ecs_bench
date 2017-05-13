@@ -15,6 +15,3 @@ script: ! '[ $TRAVIS_BRANCH = bench ] &&
   git commit -q -m "update benchmark results" &&
   git push -q -f https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git HEAD:master
 '
-env:
-  global:
-    - secure: "NjQXCzKv+9n3dm/tShaYkc3mP4Visfk2uOoOZPJk+FoEGgaFUDwdivD17PTrJoO01CNqdi40TQQrLDk2UhAaWFN/IjYWrZVnS2/q3kGziSTzNJFbVLljRFur2OGcXz2nnCuYp6Qz3EZO94guhPstE7X2G8GkUthW2qLhEWj5lE4OXErwuF515KHTBnYDn5XfShIpyaDWmzVBAQALDy5z8fmLnQzsBuHwOoJmC8tv54TWFiygkISNb+bU6AqInMn/dYaDahJxfdXWQodUyIX56/UMKZYFcYIxbxgR+Q3JXCtjBb59AAmOiC7Yq/VVcMDLMHTgHbMeyTJe/njmxG8CNWX+34NPC/jDq9s5pwDmmXx68MCrw13f8lq0ImZgfQdTngwf6vyVRb6hNPAyzvyIFDGElh+njznDlPLoPvpkWC5zR4RzXRzpGS3fn5L+EiM8CwPs5JgiPvjGW4fRwF6UdJiJouE5xdcimGI2JOGDkw2HuWQLPA7t9eZlrsrlH1zEhXM7VSnd09zcTTPbMlLpZguwMhvhA2DWmXhxahEYyYqXLT0W87RfhD/808mtp+bK9JvZPsj8H+IPipWP/CgIom8SoTbsIs0CI/Q+3Gx6y0/Ex1ZYMPMZab5Ku8mtWhNrvAIAP7UbBc1iJDL0hxL+02Hzn7kumFUFDky0W6+d/TU="
