@@ -12,7 +12,7 @@ use ecs::system::{EntityProcess, EntitySystem, System};
 use ecs::{DataHelper, EntityIter, World};
 use ecs::BuildData;
 
-use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
+use ecs_bench::pos_vel::{Position, Velocity, N_POS_PER_VEL, N_POS};
 
 components! {
     struct MyComponents {
@@ -78,15 +78,12 @@ fn build() -> World<MySystems> {
     let mut world = World::<MySystems>::new();
 
     // setup entities
-    for _ in 0..N_POS_VEL {
+    for i in 0..N_POS {
         let _ = world.create_entity(|entity: BuildData<MyComponents>, data: &mut MyComponents| {
             data.position.add(&entity, Position { x: 0.0, y: 0.0 });
-            data.velocity.add(&entity, Velocity { dx: 0.0, dy: 0.0 });
-        });
-    }
-    for _ in 0..N_POS {
-        let _ = world.create_entity(|entity: BuildData<MyComponents>, data: &mut MyComponents| {
-            data.position.add(&entity, Position { x: 0.0, y: 0.0 });
+            if i % N_POS_PER_VEL == 0 {
+                data.velocity.add(&entity, Velocity { dx: 0.0, dy: 0.0 });
+            }
         });
     }
 

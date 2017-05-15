@@ -5,10 +5,10 @@ extern crate serde;
 pub mod pos_vel {
 
     /// Entities with velocity and position component.
-    pub const N_POS_VEL: usize = 1000;
+    pub const N_POS_PER_VEL: usize = 10;
 
     /// Entities with position component only.
-    pub const N_POS: usize = 9000;
+    pub const N_POS: usize = 10000;
 
     #[derive(Copy, Clone, Debug, PartialEq, Serialize, Deserialize)]
     pub struct Position {
