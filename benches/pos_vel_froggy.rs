@@ -29,24 +29,21 @@ fn build() -> World {
     };
 
     // setup entities
-    {
-        let mut positions = world.pos.write();
-        let mut velocities = world.vel.write();
-
-        for _ in 0 .. N_POS_VEL {
-            world.entities.push(Entity {
-                pos: positions.create(Position { x: 0.0, y: 0.0 }),
-                vel: Some(velocities.create(Velocity { dx: 0.0, dy: 0.0 })),
-            });
-        }
-        for _ in 0 .. N_POS {
-            world.entities.push(Entity {
-                pos: positions.create(Position { x: 0.0, y: 0.0 }),
-                vel: None,
-            });
-        }
+    for _ in 0 .. N_POS_VEL {
+        world.entities.push(Entity {
+            pos: world.pos.create(Position { x: 0.0, y: 0.0 }),
+            vel: Some(world.vel.create(Velocity { dx: 0.0, dy: 0.0 })),
+        });
+    }
+    for _ in 0 .. N_POS {
+        world.entities.push(Entity {
+            pos: world.pos.create(Position { x: 0.0, y: 0.0 }),
+            vel: None,
+        });
     }
 
+    world.pos.sync_pending();
+    world.vel.sync_pending();
     world
 }
 
@@ -57,15 +54,13 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let world = build();
+    let mut world = build();
 
     b.iter(|| {
-        let mut positions = world.pos.write();
-        let velocities = world.vel.read();
-        for e in world.entities.iter() {
+        for e in &world.entities {
             if let Some(ref vel) = e.vel {
-                let mut p = &mut positions[&e.pos];
-                let v = velocities[vel];
+                let mut p = &mut world.pos[&e.pos];
+                let v = world.vel[vel];
                 p.x += v.dx;
                 p.y += v.dy;
             }

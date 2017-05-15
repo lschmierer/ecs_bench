@@ -7,6 +7,7 @@ extern crate froggy;
 extern crate ecs_bench;
 
 use froggy::{Pointer, Storage};
+use std::sync::{Arc, Mutex};
 
 use ecs_bench::parallel::{R, W1, W2, N};
 
@@ -18,35 +19,34 @@ struct Entity {
 
 struct World {
     r: Storage<R>,
-    w1: Storage<W1>,
-    w2: Storage<W2>,
+    w1: Mutex<Storage<W1>>,
+    w2: Mutex<Storage<W2>>,
     entities: Vec<Entity>,
 }
 
 fn build() -> World {
-    let mut world = World {
-        r: Storage::with_capacity(N),
-        w1: Storage::with_capacity(N),
-        w2: Storage::with_capacity(N),
-        entities: Vec::with_capacity(N),
-    };
+    let mut r = Storage::with_capacity(N);
+    let mut w1 = Storage::with_capacity(N);
+    let mut w2 = Storage::with_capacity(N);
 
     // setup entities
-    {
-        let mut r = world.r.write();
-        let mut w1 = world.w1.write();
-        let mut w2 = world.w2.write();
+    let entities = (0 .. N).map(|_| Entity {
+        r: r.create(R { x: 0.0 }),
+        w1: w1.create(W1 { x: 0.0 }),
+        w2: w2.create(W2 { x: 0.0 }),
+    }).collect();
 
-        for _ in 0 .. N {
-            world.entities.push(Entity {
-                r: r.create(R { x: 0.0 }),
-                w1: w1.create(W1 { x: 0.0 }),
-                w2: w2.create(W2 { x: 0.0 }),
-            });
-        }
+    // finish processing
+    r.sync_pending();
+    w1.sync_pending();
+    w2.sync_pending();
+
+    World {
+        r: r,
+        w1: Mutex::new(w1),
+        w2: Mutex::new(w2),
+        entities: entities,
     }
-
-    world
 }
 
 #[bench]
@@ -56,7 +56,6 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    use std::sync::Arc;
     use std::thread;
 
     let world = Arc::new(build());
@@ -64,18 +63,16 @@ fn bench_update(b: &mut Bencher) {
     b.iter(|| {
         let wt1 = world.clone();
         let t1 = thread::spawn(move || {
-            let r = wt1.r.read();
-            let mut w = wt1.w1.write();
-            for e in wt1.entities.iter() {
-                w[&e.w1].x = r[&e.r].x;
+            let mut w1 = wt1.w1.lock().unwrap();
+            for e in &wt1.entities {
+                w1[&e.w1].x = wt1.r[&e.r].x;
             }
         });
         let wt2 = world.clone();
         let t2 = thread::spawn(move || {
-            let r = wt2.r.read();
-            let mut w = wt2.w2.write();
-            for e in wt2.entities.iter() {
-                w[&e.w2].x = r[&e.r].x;
+            let mut w2 = wt2.w2.lock().unwrap();
+            for e in &wt2.entities {
+                w2[&e.w2].x = wt2.r[&e.r].x;
             }
         });
         t1.join().unwrap();
