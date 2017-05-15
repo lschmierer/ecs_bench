@@ -7,9 +7,9 @@ extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, Planner, VecStorage};
+use specs::{World, Entity, Component, Gate, Planner, HashMapStorage, VecStorage};
 
-use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
+use ecs_bench::pos_vel::{Position, Velocity, N_POS_PER_VEL, N_POS};
 
 struct PosComp(Position);
 impl Component for PosComp {
@@ -18,7 +18,7 @@ impl Component for PosComp {
 
 struct VelComp(Velocity);
 impl Component for VelComp {
-    type Storage = VecStorage<VelComp>;
+    type Storage = HashMapStorage<VelComp>;
 }
 
 fn build() -> Planner<()> {
@@ -28,21 +28,20 @@ fn build() -> Planner<()> {
 
     // setup entities
     {
-        let ents: Vec<Entity> = w.create_iter().take(N_POS_VEL + N_POS).collect();
+        let ents: Vec<Entity> = w.create_iter().take(N_POS).collect();
 
-        let mut positions = w.write::<PosComp>();
-        let mut velocities = w.write::<VelComp>();
+        let mut positions = w.write::<PosComp>().pass();
+        let mut velocities = w.write::<VelComp>().pass();
 
-        for e in ents[..N_POS_VEL].iter() {
+        for (i, e) in ents.iter().enumerate() {
             positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
-            velocities.insert(*e, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
-        }
-        for e in ents[N_POS_VEL..].iter() {
-            positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
+            if i % N_POS_PER_VEL == 0 {
+                velocities.insert(*e, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
+            }
         }
     }
 
-    Planner::new(w, 4)
+    Planner::new(w)
 }
 
 #[bench]
