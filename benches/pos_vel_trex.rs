@@ -8,7 +8,7 @@ extern crate trex;
 use trex::{System, EventQueue, EventEmitter, Simulation, World, ComponentFilter};
 
 extern crate ecs_bench;
-use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
+use ecs_bench::pos_vel::{Position, Velocity, N_POS_PER_VEL, N_POS};
 
 pub struct PosComp(Position);
 pub struct VelComp(Velocity);
@@ -72,16 +72,14 @@ fn build() -> Simulation {
         world.register::<PosComp>();
         world.register::<VelComp>();
 
-        for _ in 0..N_POS_VEL {
+        for i in 0..N_POS {
             let entity = world.create();
             world.add(entity, PosComp(Position { x: 0.0, y: 0.0 }));
-            world.add(entity, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
+            if i % N_POS_PER_VEL == 0 {
+                world.add(entity, VelComp(Velocity { dx: 0.0, dy: 0.0 }));
+            }
         }
 
-        for _ in 0..N_POS {
-            let entity = world.create();
-            world.add(entity, PosComp(Position { x: 0.0, y: 0.0 }));
-        }
         world
     };
 

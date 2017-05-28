@@ -9,7 +9,7 @@ extern crate ecs_bench;
 
 use constellation::{SystemCommandBuffer, VecResource, World};
 
-use ecs_bench::pos_vel::{Position, Velocity, N_POS_VEL, N_POS};
+use ecs_bench::pos_vel::{Position, Velocity, N_POS_PER_VEL, N_POS};
 
 type Positions = VecResource<Position>;
 type Velocities = VecResource<Velocity>;
@@ -19,17 +19,12 @@ fn build() -> World {
     // setup entities
     update.queue_systems(|scope| {
         scope.run_r0w2(|ctx, positions: &mut Positions, velocities: &mut Velocities| {
-            for _ in 0..N_POS_VEL {
+            for i in 0..N_POS {
                 let e = ctx.create();
                 positions.add(e, Position { x: 0.0, y: 0.0 });
-                velocities.add(e, Velocity { dx: 0.0, dy: 0.0 });
-            }
-        });
-
-        scope.run_r0w1(|ctx, positions: &mut Positions| {
-            for _ in 0..N_POS {
-                let e = ctx.create();
-                positions.add(e, Position { x: 0.0, y: 0.0 });
+                if i % N_POS_PER_VEL == 0 {
+                    velocities.add(e, Velocity { dx: 0.0, dy: 0.0 });
+                }
             }
         });
     });

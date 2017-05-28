@@ -7,7 +7,7 @@ extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, Planner, VecStorage};
+use specs::{World, Entity, Component, Gate, Planner, VecStorage};
 
 use ecs_bench::parallel::{R, W1, W2, N};
 
@@ -36,9 +36,9 @@ fn build() -> Planner<()> {
     {
         let ents: Vec<Entity> = w.create_iter().take(N).collect();
 
-        let mut rs = w.write::<RComp>();
-        let mut w1s = w.write::<W1Comp>();
-        let mut w2s = w.write::<W2Comp>();
+        let mut rs = w.write::<RComp>().pass();
+        let mut w1s = w.write::<W1Comp>().pass();
+        let mut w2s = w.write::<W2Comp>().pass();
 
         for e in ents {
             rs.insert(e, RComp(R { x: 0.0 }));
@@ -47,7 +47,7 @@ fn build() -> Planner<()> {
         }
     }
 
-    Planner::new(w, 4)
+    Planner::new(w)
 }
 
 #[bench]
