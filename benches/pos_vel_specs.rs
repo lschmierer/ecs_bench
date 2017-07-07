@@ -7,21 +7,38 @@ extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, Gate, Planner, HashMapStorage, VecStorage};
+use specs::{World, Entity, Component, DenseVecStorage, Dispatcher, DispatcherBuilder, Join, ReadStorage, System, WriteStorage};
 
 use ecs_bench::pos_vel::{Position, Velocity, N_POS_PER_VEL, N_POS};
 
 struct PosComp(Position);
 impl Component for PosComp {
-    type Storage = VecStorage<PosComp>;
+    type Storage = DenseVecStorage<PosComp>;
 }
 
 struct VelComp(Velocity);
 impl Component for VelComp {
-    type Storage = HashMapStorage<VelComp>;
+    type Storage = DenseVecStorage<VelComp>;
 }
 
-fn build() -> Planner<()> {
+struct VelSys;
+impl<'a> System<'a> for VelSys {
+    type SystemData = (ReadStorage<'a, VelComp>, WriteStorage<'a, PosComp>);
+    fn run(&mut self, (vel, mut pos): Self::SystemData) {
+        for (p, v) in (&mut pos, &vel).join() {
+            p.0.x += v.0.dx;
+            p.0.y += v.0.dy;
+        }
+    }
+}
+
+struct PosSys;
+impl<'a> System<'a> for PosSys {
+    type SystemData = (ReadStorage<'a, PosComp>);
+    fn run(&mut self, pos: Self::SystemData) { }
+}
+
+fn build<'a, 'b>() -> (World, Dispatcher<'a, 'b>) {
     let mut w = World::new();
     w.register::<PosComp>();
     w.register::<VelComp>();
@@ -30,8 +47,8 @@ fn build() -> Planner<()> {
     {
         let ents: Vec<Entity> = w.create_iter().take(N_POS).collect();
 
-        let mut positions = w.write::<PosComp>().pass();
-        let mut velocities = w.write::<VelComp>().pass();
+        let mut positions = w.write::<PosComp>();
+        let mut velocities = w.write::<VelComp>();
 
         for (i, e) in ents.iter().enumerate() {
             positions.insert(*e, PosComp(Position { x: 0.0, y: 0.0 }));
@@ -41,7 +58,11 @@ fn build() -> Planner<()> {
         }
     }
 
-    Planner::new(w)
+    let dispatcher = DispatcherBuilder::new()
+        .add(VelSys, "vel", &[])
+        .add(PosSys, "pos", &[])
+        .build();
+    (w, dispatcher)
 }
 
 #[bench]
@@ -51,15 +72,9 @@ fn bench_build(b: &mut Bencher) {
 
 #[bench]
 fn bench_update(b: &mut Bencher) {
-    let mut planner = build();
+    let (mut world, mut dispatcher) = build();
 
     b.iter(|| {
-        planner.run1w1r(|p: &mut PosComp, v: &VelComp| {
-            p.0.x += v.0.dx;
-            p.0.y += v.0.dy;
-        });
-        planner.run0w1r(|_: &PosComp| {
-        });
-        planner.wait();
+        dispatcher.dispatch(&mut world.res);
     });
 }
