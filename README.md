@@ -7,13 +7,13 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Library         | pos_vel build                 | pos_vel update                 | parallel build                 | parallel update
  --------------- |:-----------------------------:|:------------------------------:|:------------------------------:|:--------------------------------:
- [calx-ecs]      | 262,246 ns/iter (+/- 10,243)      | 20,875 ns/iter (+/- 11,458)      | 455,406 ns/iter (+/- 129,556)      | 91,428 ns/iter (+/- 53,627)
- [constellation] | 326,545 ns/iter (+/- 113,917) | 8,861 ns/iter (+/- 4,076) | 489,986 ns/iter (+/- 332,728) | 349,775 ns/iter (+/- 137,372)
- [ecs]           | 1,372,789 ns/iter (+/- 17,618)           | 340,118 ns/iter (+/- 7,066)           | 1,534,586 ns/iter (+/- 812,866)           | 4,864,300 ns/iter (+/- 960,516)
- [froggy]        | 618,024 ns/iter (+/- 35,137)        | 14,562 ns/iter (+/- 113)        | 1,418,492 ns/iter (+/- 283,388)        | 122,803 ns/iter (+/- 86,061)
- [recs]          | 10,282,752 ns/iter (+/- 1,900,688)          | 3,402,040 ns/iter (+/- 782,486)          | 14,629,164 ns/iter (+/- 4,185,851)          | 5,840,296 ns/iter (+/- 659,755)
- [specs]         | 1,329,521 ns/iter (+/- 975,959)         | 99,369 ns/iter (+/- 22,322)         | 2,509,879 ns/iter (+/- 1,876,549)         | 167,202 ns/iter (+/- 21,261)
- [trex]          | 1,065,914 ns/iter (+/- 490,157)          | 213,262 ns/iter (+/- 3,674)          | 1,517,165 ns/iter (+/- 127,046)          | 438,299 ns/iter (+/- 42,209)
+ [calx-ecs]      | 259,498 ns/iter (+/- 14,073)      | 16,923 ns/iter (+/- 625)      | 468,736 ns/iter (+/- 18,206)      | 61,278 ns/iter (+/- 3,564)
+ [constellation] | 247,096 ns/iter (+/- 14,133) | 7,394 ns/iter (+/- 281) | 394,240 ns/iter (+/- 33,396) | 92,023 ns/iter (+/- 44,463)
+ [ecs]           | 1,204,888 ns/iter (+/- 92,548)           | 284,273 ns/iter (+/- 8,012)           | 1,202,208 ns/iter (+/- 63,634)           | 3,628,299 ns/iter (+/- 189,770)
+ [froggy]        | 621,384 ns/iter (+/- 56,370)        | 9,922 ns/iter (+/- 366)        | 1,403,936 ns/iter (+/- 75,464)        | 85,482 ns/iter (+/- 6,672)
+ [recs]          | 5,165,557 ns/iter (+/- 860,578)          | 3,644,667 ns/iter (+/- 1,116,716)          | 12,573,088 ns/iter (+/- 1,580,716)          | 9,103,369 ns/iter (+/- 3,317,322)
+ [specs]         | 471,536 ns/iter (+/- 24,807)         | 8,868 ns/iter (+/- 381)         | 752,958 ns/iter (+/- 127,086)         | 46,947 ns/iter (+/- 695)
+ [trex]          | 1,693,309 ns/iter (+/- 149,352)          | 193,135 ns/iter (+/- 19,970)          | 2,098,170 ns/iter (+/- 236,378)          | 389,157 ns/iter (+/- 17,623)
 
 [calx-ecs]: https://github.com/rsaarelm/calx-ecs
 [constellation]: https://github.com/TomGillen/constellation/
