@@ -1,9 +1,0 @@
-title pos_vel_build pos_vel_update parallel_build parallel_update
-ecs 1 0.2 3 0.1 1 0.15 3 0.4
-specs 1 0.2 3 0.1 1 0.15 3 0.4
-recs 1 0.2 3 0.1 1 0.15 3 0.4
-trex 1 0.2 3 0.1 1 0.15 3 0.4
-calx-ecs 1 0.2 3 0.1 1 0.15 3 0.4
-froggy 1 0.2 3 0.1 1 0.15 3 0.4
-constellation 1 0.2 3 0.1 1 0.15 3 0.4
-
