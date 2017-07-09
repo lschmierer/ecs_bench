@@ -1,0 +1,27 @@
+
+set encoding utf8
+
+# set width of the graph to num of libraries * 10
+set xrange[0:words(libraries) * 10]
+set yrange[0:*]
+
+set title bench font ",16"
+set title boxed font ",16"
+set style fill solid border lt -1
+set style textbox opaque noborder
+set boxwidth 5.0 abs
+unset key
+
+set lmargin 12
+set ylabel "µs/iter" offset 0,0 rotate by 0 font ",16"
+
+set border 0
+set xtics scale 0 font ",16"
+set ytics scale 0 font ",16"
+set grid y
+set bmargin at screen 0.2
+set tmargin at screen 0.9
+unset colorbox
+
+set terminal svg size 800, 800 enhanced
+plot data using 2:3:4:xticlabels(1) with boxerrorbars

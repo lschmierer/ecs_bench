@@ -12,6 +12,7 @@ before_install:
   - make
   - sudo make install
   - gnuplot --version
+  - cd ../
 script: ! '[ $TRAVIS_BRANCH = bench ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
   export PATH=$HOME/.local/bin:$PATH &&
