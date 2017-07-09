@@ -4,6 +4,14 @@ rust:
 branches:
   only:
     - bench
+before_install:
+  - curl -L https://downloads.sourceforge.net/project/gnuplot/gnuplot/5.0.6/gnuplot-5.0.6.tar.gz > gnuplot-5.0.6.tar.gz
+  - tar xzf gnuplot-5.0.6.tar.gz
+  - cd gnuplot-5.0.6
+  - ./configure
+  - make
+  - sudo make install
+  - gnuplot --version
 script: ! '[ $TRAVIS_BRANCH = bench ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
   export PATH=$HOME/.local/bin:$PATH &&
