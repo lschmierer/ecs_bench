@@ -1,0 +1,35 @@
+
+small_font = ",30"
+medium_font = ",36"
+large_font = ",54"
+
+set encoding utf8
+
+set xrange[0:*]
+set yrange[0:*]
+set auto x
+
+set style data histogram
+set style histogram errorbars gap 1 lw 1
+set style fill solid noborder
+set boxwidth 1
+set bars 1.5
+
+set key auto columnheader font small_font
+#set key auto bmargin center horizontal font ",30" title
+
+# ylabel microseconds/iter
+set lmargin 30
+set ylabel "µs/iter" offset -10,0 rotate by 0 font medium_font
+
+set border
+set xtics offset 0,-2 scale 0 font medium_font
+set ytics scale 1 font medium_font
+set bmargin at screen 0.12
+set tmargin at screen 0.92
+unset colorbox
+
+set terminal png size 3000, 1800 noenhanced
+
+plot data using 2:3:xticlabels(1) ti col(2), '' u 4:5 ti col(3), '' u 6:7 ti col(4), '' u 8:9 ti col(5)
+
