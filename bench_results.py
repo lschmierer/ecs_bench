@@ -85,7 +85,7 @@ def graph(dataset, targets, names, benches, title):
         dat.write(formatted)
 
     # commands to send to `gnuplot`
-    args = "gnuplot -e \"data=\'./graph/{0}.dat';title=\'{0}\';\" ./graph/graph.script > ./graph/{0}.png"
+    args = "gnuplot -e \"data=\'./graph/{0}.dat';title=\'{0}\';columns={1}\" ./graph/graph.script > ./graph/{0}.png"
     subprocess.call(args.format(title, len(targets) * len(names)), stderr=subprocess.STDOUT, shell=True)
 
 graph(dataset, bench_targets, bench_names, benches, "all")

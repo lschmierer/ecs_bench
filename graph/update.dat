@@ -1,7 +1,7 @@
  update pos_vel_update parallel_update
- ecs 292 24 3708 407
- specs 9 2 47 5
- trex 199 8 400 34
- calx_ecs 17 0 62 6
- froggy 10 0 86 13
- constellation 7 0 96 59
+ ecs 312 144 3899 1455
+ specs 9 4 52 6
+ trex 222 140 422 50
+ calx_ecs 18 1 67 18
+ froggy 10 1 99 40
+ constellation 8 6 159 235
