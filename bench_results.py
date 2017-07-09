@@ -77,9 +77,6 @@ for target in bench_targets:
             final = commas(result) + " " + ms + "s/iter (+/- " + commas(error) + ")"
             readme = readme.replace('{' + target + '_' + name + '_' + bench + '}', final)
             dataset[name][target][bench] = (result, error)
-            print "inserting: [{}][{}][{}] = {}".format(name, target, bench, (result, error))
-
-print "dataset: ", dataset
 
 def graph(dataset, targets, names, benches, title):
     data = table_format(dataset, targets, names, benches, title)
@@ -88,8 +85,8 @@ def graph(dataset, targets, names, benches, title):
         dat.write(formatted)
 
     # commands to send to `gnuplot`
-    args = "gnuplot -e \"data=\'./graph/{}.dat';\" ./graph/graph.script > ./graph/{}.png"
-    subprocess.call(args.format(title, title), stderr=subprocess.STDOUT, shell=True)
+    args = "gnuplot -e \"data=\'./graph/{0}.dat';title=\'{0}\';\" ./graph/graph.script > ./graph/{0}.png"
+    subprocess.call(args.format(title, len(targets) * len(names)), stderr=subprocess.STDOUT, shell=True)
 
 graph(dataset, bench_targets, bench_names, benches, "all")
 graph(dataset, bench_targets, ["update"], benches, "update")

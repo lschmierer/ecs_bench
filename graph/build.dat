@@ -1,7 +1,7 @@
  build pos_vel_build parallel_build
- ecs 1249 98 1154 48
- specs 478 40 709 37
- trex 1581 73 2116 118
- calx_ecs 259 10 437 30
- froggy 611 19 1472 115
- constellation 252 14 396 22
+ ecs 1213 107 1223 106
+ specs 467 37 733 121
+ trex 1711 215 2142 221
+ calx_ecs 247 14 437 21
+ froggy 632 58 1500 262
+ constellation 248 32 411 96

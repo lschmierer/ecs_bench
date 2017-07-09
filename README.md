@@ -7,13 +7,13 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Library         | pos_vel build                 | pos_vel update                 | parallel build                 | parallel update
  --------------- |:-----------------------------:|:------------------------------:|:------------------------------:|:--------------------------------:
- [calx-ecs]      | 259 µs/iter (+/- 10)      | 16 µs/iter (+/- 0)      | 437 µs/iter (+/- 30)      | 62 µs/iter (+/- 3)
- [constellation] | 252 µs/iter (+/- 14) | 7 µs/iter (+/- 0) | 396 µs/iter (+/- 22) | 97 µs/iter (+/- 33)
- [ecs]           | 1,249 µs/iter (+/- 98)           | 296 µs/iter (+/- 8)           | 1,154 µs/iter (+/- 48)           | 3,648 µs/iter (+/- 142)
- [froggy]        | 611 µs/iter (+/- 19)        | 10 µs/iter (+/- 0)        | 1,472 µs/iter (+/- 115)        | 84 µs/iter (+/- 3)
+ [calx-ecs]      | 247 µs/iter (+/- 14)      | 17 µs/iter (+/- 0)      | 437 µs/iter (+/- 21)      | 62 µs/iter (+/- 6)
+ [constellation] | 248 µs/iter (+/- 32) | 7 µs/iter (+/- 0) | 411 µs/iter (+/- 96) | 96 µs/iter (+/- 59)
+ [ecs]           | 1,213 µs/iter (+/- 107)           | 292 µs/iter (+/- 24)           | 1,223 µs/iter (+/- 106)           | 3,708 µs/iter (+/- 407)
+ [froggy]        | 632 µs/iter (+/- 58)        | 10 µs/iter (+/- 0)        | 1,500 µs/iter (+/- 262)        | 86 µs/iter (+/- 13)
  [recs]          | {pos_vel_build_recs}          | {pos_vel_update_recs}          | {parallel_build_recs}          | {parallel_update_recs}
- [specs]         | 478 µs/iter (+/- 40)         | 8 µs/iter (+/- 0)         | 709 µs/iter (+/- 37)         | 50 µs/iter (+/- 1)
- [trex]          | 1,581 µs/iter (+/- 73)          | 200 µs/iter (+/- 12)          | 2,116 µs/iter (+/- 118)          | 409 µs/iter (+/- 27)
+ [specs]         | 467 µs/iter (+/- 37)         | 9 µs/iter (+/- 2)         | 733 µs/iter (+/- 121)         | 47 µs/iter (+/- 5)
+ [trex]          | 1,711 µs/iter (+/- 215)          | 199 µs/iter (+/- 8)          | 2,142 µs/iter (+/- 221)          | 400 µs/iter (+/- 34)
 
 [calx-ecs]: https://github.com/rsaarelm/calx-ecs
 [constellation]: https://github.com/TomGillen/constellation/
