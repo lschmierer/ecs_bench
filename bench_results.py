@@ -1,7 +1,7 @@
 import subprocess
 
 
-benches = ['ecs', 'specs', 'trex', 'calx_ecs', 'froggy', 'constellation']
+benches = ['ecs', 'specs', 'recs', 'trex', 'calx_ecs', 'froggy', 'constellation']
 bench_targets = ['pos_vel', 'parallel']
 bench_names = ['build', 'update']
 libraries = ' '.join(benches)
@@ -55,7 +55,7 @@ for target in bench_targets:
         # commands to send to `gnuplot`
         commands = '''"bench='{}';data='./data/{}.dat';libraries='{}';"'''
         commands = commands.format(target_name.replace('_', ' '), target_name, libraries);
-        args = "gnuplot -e " + commands + " plot.dem > ./graphs/" + target_name + ".svg"
+        args = "gnuplot -e " + commands + " plot.dem > ./graphs/" + target_name + ".png"
         subprocess.call(args, stderr=subprocess.STDOUT, shell=True)
 
 with open('README.md', 'w') as f:
