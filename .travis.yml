@@ -12,6 +12,7 @@ before_install:
   - ./configure
   - make && sudo make install-strip
   - gnuplot --version
+  - cd ../
 script:
   ! '[ $TRAVIS_BRANCH = bench ] &&
     [ $TRAVIS_PULL_REQUEST = false ] &&
