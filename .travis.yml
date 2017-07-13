@@ -10,7 +10,7 @@ before_install:
   - tar xzf gnuplot-5.0.6.tar.gz
   - cd gnuplot-5.0.6
   - ./configure
-  - make && make install-strip
+  - make && sudo make install-strip
   - gnuplot --version
 script:
   ! '[ $TRAVIS_BRANCH = bench ] &&
