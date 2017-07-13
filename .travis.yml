@@ -1,6 +1,12 @@
 language: rust
 rust:
 - nightly
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb http://deb.debian.org/debian stable main'
+    packages:
+      - gnuplot=5
 branches:
   only:
     - bench
@@ -12,6 +18,6 @@ script: ! '[ $TRAVIS_BRANCH = bench ] &&
   git config user.email "lukas.schmierer@lschmierer.de" &&
   git config user.name "Lukas Schmierer" &&
   git add README.md &&
-  git commit -q -m "update benchmark results" &&
+  git commit -q -m "Update benchmark results" &&
   git push -q -f https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git HEAD:master
 '
