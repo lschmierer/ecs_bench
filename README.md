@@ -7,12 +7,12 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Library         | pos_vel build                 | pos_vel update                 | parallel build                 | parallel update
  --------------- |:-----------------------------:|:------------------------------:|:------------------------------:|:--------------------------------:
- [calx-ecs]      | 288 µs/iter (+/- 29)      | 18 µs/iter (+/- 1)      | 505 µs/iter (+/- 234)      | 67 µs/iter (+/- 18)
- [constellation] | 271 µs/iter (+/- 31) | 8 µs/iter (+/- 6) | 452 µs/iter (+/- 132) | 159 µs/iter (+/- 235)
- [ecs]           | 1,422 µs/iter (+/- 645)           | 312 µs/iter (+/- 144)           | 1,567 µs/iter (+/- 733)           | 3,899 µs/iter (+/- 1,455)
- [froggy]        | 685 µs/iter (+/- 271)        | 10 µs/iter (+/- 1)        | 1,601 µs/iter (+/- 597)        | 99 µs/iter (+/- 40)
- [specs]         | 479 µs/iter (+/- 60)         | 9 µs/iter (+/- 4)         | 797 µs/iter (+/- 123)         | 52 µs/iter (+/- 6)
- [trex]          | 1,875 µs/iter (+/- 757)          | 222 µs/iter (+/- 140)          | 2,310 µs/iter (+/- 248)          | 422 µs/iter (+/- 50)
+ [calx-ecs]      | 285 µs/iter (+/- 10)      | 20 µs/iter (+/- 0)      | 493 µs/iter (+/- 50)      | 74 µs/iter (+/- 5)
+ [constellation] | 307 µs/iter (+/- 7) | 8 µs/iter (+/- 0) | 471 µs/iter (+/- 9) | 166 µs/iter (+/- 2)
+ [ecs]           | 1,698 µs/iter (+/- 132)           | 366 µs/iter (+/- 100)           | 1,482 µs/iter (+/- 27)           | 3,610 µs/iter (+/- 55)
+ [froggy]        | 662 µs/iter (+/- 6)        | 14 µs/iter (+/- 0)        | 1,521 µs/iter (+/- 32)        | 104 µs/iter (+/- 12)
+ [specs]         | 463 µs/iter (+/- 31)         | 13 µs/iter (+/- 0)         | 760 µs/iter (+/- 83)         | 99 µs/iter (+/- 9)
+ [trex]          | 1,439 µs/iter (+/- 256)          | 198 µs/iter (+/- 12)          | 2,146 µs/iter (+/- 99)          | 422 µs/iter (+/- 11)
 
 [calx-ecs]: https://github.com/rsaarelm/calx-ecs
 [constellation]: https://github.com/TomGillen/constellation/
