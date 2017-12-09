@@ -3,36 +3,39 @@
 extern crate test;
 use test::Bencher;
 
+extern crate rayon;
 extern crate specs;
 
 extern crate ecs_bench;
 
-use specs::{World, Entity, Component, DenseVecStorage, Dispatcher, DispatcherBuilder, Join, ReadStorage, System, WriteStorage};
+use rayon::prelude::*;
+use specs::{World, Entity, Component, Dispatcher, DispatcherBuilder, ParJoin, ReadStorage, System,
+            VecStorage, WriteStorage};
 
 use ecs_bench::parallel::{R, W1, W2, N};
 
 struct RComp(R);
 impl Component for RComp {
-    type Storage = DenseVecStorage<RComp>;
+    type Storage = VecStorage<RComp>;
 }
 
 struct W1Comp(W1);
 impl Component for W1Comp {
-    type Storage = DenseVecStorage<W1Comp>;
+    type Storage = VecStorage<W1Comp>;
 }
 
 struct W2Comp(W2);
 impl Component for W2Comp {
-    type Storage = DenseVecStorage<W2Comp>;
+    type Storage = VecStorage<W2Comp>;
 }
 
 struct Sys1;
 impl<'a> System<'a> for Sys1 {
     type SystemData = (WriteStorage<'a, W1Comp>, ReadStorage<'a, RComp>);
     fn run(&mut self, (mut w1s, rs): Self::SystemData) {
-        for (w1, r) in (&mut w1s, &rs).join() {
+        (&mut w1s, &rs).par_join().for_each(|(w1, r)| {
             w1.0.x = r.0.x;
-        }
+        });
     }
 }
 
@@ -40,13 +43,13 @@ struct Sys2;
 impl<'a> System<'a> for Sys2 {
     type SystemData = (WriteStorage<'a, W2Comp>, ReadStorage<'a, RComp>);
     fn run(&mut self, (mut w2s, rs): Self::SystemData) {
-        for (w2, r) in (&mut w2s, &rs).join() {
+        (&mut w2s, &rs).par_join().for_each(|(w2, r)| {
             w2.0.x = r.0.x;
-        }
+        });
     }
 }
 
-fn build<'a, 'b>() -> (World, Dispatcher<'a, 'b>) {
+fn build() -> (World, Dispatcher<'static, 'static>) {
     let mut w = World::new();
     w.register::<RComp>();
     w.register::<W1Comp>();
