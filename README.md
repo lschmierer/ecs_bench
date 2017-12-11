@@ -7,12 +7,12 @@ Benchmarks are located in `benches/[bench_name]_[ecs_crate_name].rs`.
 
  Library         | pos_vel build                 | pos_vel update                 | parallel build                 | parallel update
  --------------- |:-----------------------------:|:------------------------------:|:------------------------------:|:--------------------------------:
- [calx-ecs]      | 283 µs/iter (+/- 9)      | 20 µs/iter (+/- 0)      | 464 µs/iter (+/- 33)      | 78 µs/iter (+/- 3)
- [constellation] | 311 µs/iter (+/- 10) | 9 µs/iter (+/- 0) | 488 µs/iter (+/- 24) | 169 µs/iter (+/- 15)
- [ecs]           | 1,442 µs/iter (+/- 104)           | 327 µs/iter (+/- 14)           | 1,436 µs/iter (+/- 93)           | 3,823 µs/iter (+/- 200)
- [froggy]        | 645 µs/iter (+/- 36)        | 15 µs/iter (+/- 0)        | 1,493 µs/iter (+/- 62)        | 102 µs/iter (+/- 4)
- [specs]         | 320 µs/iter (+/- 19)         | 4 µs/iter (+/- 0)         | 780 µs/iter (+/- 47)         | 101 µs/iter (+/- 6)
- [trex]          | 1,194 µs/iter (+/- 88)          | 203 µs/iter (+/- 11)          | 1,685 µs/iter (+/- 153)          | 425 µs/iter (+/- 18)
+ [calx-ecs]      | 228 µs/iter (+/- 7)      | 18 µs/iter (+/- 0)      | 385 µs/iter (+/- 18)      | 76 µs/iter (+/- 1)
+ [constellation] | 280 µs/iter (+/- 8) | 8 µs/iter (+/- 0) | 455 µs/iter (+/- 6) | 152 µs/iter (+/- 13)
+ [ecs]           | 1,452 µs/iter (+/- 39)           | 324 µs/iter (+/- 29)           | 1,380 µs/iter (+/- 29)           | 3,644 µs/iter (+/- 74)
+ [froggy]        | 589 µs/iter (+/- 10)        | 8 µs/iter (+/- 0)        | 1,429 µs/iter (+/- 65)        | 73 µs/iter (+/- 2)
+ [specs]         | 261 µs/iter (+/- 7)         | 3 µs/iter (+/- 0)         | 675 µs/iter (+/- 88)         | 87 µs/iter (+/- 1)
+ [trex]          | 1,094 µs/iter (+/- 81)          | 179 µs/iter (+/- 2)          | 1,637 µs/iter (+/- 172)          | 379 µs/iter (+/- 11)
 
 [calx-ecs]: https://github.com/rsaarelm/calx-ecs
 [constellation]: https://github.com/TomGillen/constellation/
