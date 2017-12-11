@@ -6,6 +6,8 @@ branches:
   only:
     - bench
 before_install:
+  - sudo apt-get install libcairo2-dev
+  - sudo apt-get install libpango1.0-dev
   - curl -L https://downloads.sourceforge.net/project/gnuplot/gnuplot/5.0.6/gnuplot-5.0.6.tar.gz > gnuplot-5.0.6.tar.gz
   - tar xzf gnuplot-5.0.6.tar.gz
   - cd gnuplot-5.0.6
